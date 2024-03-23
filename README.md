@@ -37,3 +37,9 @@ countEnd = 連番で作成するときの最後の数
 categoryId = カテゴリーID  
 userLimit = VCの人数制限数  
 指定されたカテゴリー内の全てのVCチャンネルの人数制限を行います。
+
+・kick {targetRoleId} {kick_reason}  
+引数:  
+targetRoleId = キックしないメンバーのロールを選択「,」区切りで複数ロール選択可能  
+kick_reason = キック理由  
+指定したロール以外のメンバーを全員キックします
