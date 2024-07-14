@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { Client, Intents } = require('discord.js');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS] });
 
 const TOKEN = process.env.TOKEN;
 const PREFIX = process.env.PREFIX;
@@ -13,7 +13,6 @@ client.once('ready', () => {
 client.on('messageCreate', async message => {
     if (message.author.bot) return;
     if (message.author.id !== OWNER_ID) return;
-
     // コマンドと引数に分割
     const args = message.content.slice(PREFIX.length).trim().split(/ +/);
     const command = args.shift().toLowerCase();
@@ -56,7 +55,7 @@ client.on('messageCreate', async message => {
         const channelNameTemplate = args[1];
         const countStart = parseInt(args[2]);
         const countEnd = parseInt(args[3]);
-
+        console.log(args);
         if (!categoryId) return message.reply('カテゴリーIDを指定してください。');
         if (!channelNameTemplate) return message.reply('チャンネル名を指定してください。');
         if (isNaN(countStart)) return message.reply('有効な開始番号を指定してください。');
@@ -106,10 +105,8 @@ client.on('messageCreate', async message => {
 
         try {
             await message.guild.members.fetch();
-    
             message.guild.members.cache.forEach((member) => {
                 const memberRoles = member.roles.cache;
-                
                 if (!targetRoleId.some(roleId => memberRoles.has(roleId))) {
                     member.kick(kick_reason)
                         .then((kickedMember) => {
