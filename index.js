@@ -65,7 +65,9 @@ client.on('messageCreate', async message => {
         const category = await message.guild.channels.cache.get(categoryId);
 
         for (let i = countStart; i <= countEnd; i++){
-            const channelName = includesPlaceholder ? channelNameTemplate.replace('${i}', i) : channelNameTemplate;
+            const channelName = channelNameTemplate.includes('${i}')
+            ? channelNameTemplate.replace('${i}', i)
+            : channelNameTemplate;
             await message.guild.channels.create(channelName, {
                 type: 'GUILD_VOICE',
                 parent: category,
