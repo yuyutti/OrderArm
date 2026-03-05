@@ -50,7 +50,7 @@ client.on('messageCreate', async message => {
         } else console.error('Category not found or invalid category ID');
     }
 
-    if (command === 'createVCs' || command === 'cvc') { // ボイスチャンネルの一括作成
+    if (command === 'createvcs' || command === 'cvc') { // ボイスチャンネルの一括作成
         const categoryId = args[0];
         const channelNameTemplate = args[1];
         const countStart = parseInt(args[2]);
@@ -74,7 +74,7 @@ client.on('messageCreate', async message => {
             });
         }
 
-        await message.reply(`ボイスチャンネルが${countEnd}個作成されました！`);
+        await message.reply(`ボイスチャンネルが${countEnd - countStart + 1}個作成されました！`);
     }
 
     if (command === 'set') { // カテゴリー内のボイスチャンネルの人数制限を一括設定
